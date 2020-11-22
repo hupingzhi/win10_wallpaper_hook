@@ -32,6 +32,7 @@ def main():
     mobile_file_list = os.listdir(mobile_wallpaper_dir)
     mobile_file_list = [i[0:-4] for i in mobile_file_list]
 
+    cp_cnt = 0
     for filename in src_file_list:
         img = Image.open(wallpaper_path+os.sep+filename)
         img_width = img.width
@@ -49,14 +50,21 @@ def main():
             # print(src_filepath, tgt_filepath)
             if filename not in desktop_file_list:
                 shutil.copyfile(src_filepath, tgt_filepath)
-                print('已拷贝%s.%s至桌面背景' % (filename, img_format))
+                cp_cnt += 1
+                print('已拷贝%s.%s(%s,%s)至桌面背景' % (filename, img_format, img_width, img_height))
         elif img_height > img_width > 1000:
             src_filepath = wallpaper_path + os.sep + filename
             tgt_filepath = mobile_wallpaper_dir + os.sep + filename + '.' + img_format
 
             if filename not in mobile_file_list:
                 shutil.copyfile(src_filepath, tgt_filepath)
-                print('已拷贝%s.%s至手机背景' % (filename, img_format))
+                cp_cnt += 1
+                print('已拷贝%s.%s(%s,%s)至手机背景' % (filename, img_format, img_width, img_height))
+
+    if cp_cnt > 0:
+        print('总计拷贝 %s 张新壁纸' % cp_cnt)
+    else:
+        print('未发现新壁纸')
 
 
 if __name__ == '__main__':
