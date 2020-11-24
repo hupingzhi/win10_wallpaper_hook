@@ -1,13 +1,19 @@
 from PIL import Image
 import os
 import shutil
+import configparser
 
 
-# 配置壁纸路径
-wallpaper_path = 'C:/Users/dongmei/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets'
-work_path = 'D:/Person/hupz/Pictures'
-desktop_wallpaper_dir = '桌面背景'
-mobile_wallpaper_dir = '手机背景'
+# 读取配置文件内容
+file = 'configuration.ini'
+con = configparser.ConfigParser()
+con.read(file, encoding='utf-8')
+sections = con.sections()
+file_path = dict(con.items('file_path'))
+wallpaper_path = file_path['wallpaper_path']
+store_path = file_path['store_path']
+desktop_wallpaper_dir = file_path['desktop_wallpaper_dir']
+mobile_wallpaper_dir = file_path['mobile_wallpaper_dir']
 
 
 def create_dir_if_not_exist(tgt_dir):
@@ -19,7 +25,8 @@ def create_dir_if_not_exist(tgt_dir):
 
 def main():
 
-    os.chdir(work_path)
+    create_dir_if_not_exist(store_path)
+    os.chdir(store_path)
 
     create_dir_if_not_exist(desktop_wallpaper_dir)
     create_dir_if_not_exist(mobile_wallpaper_dir)
