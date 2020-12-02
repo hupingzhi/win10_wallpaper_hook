@@ -5,7 +5,9 @@ save wallpapers of win10 to your own folders
 
 ## win10壁纸抓取器
 
-### 调整配置文件
+
+
+### 调整配置文件configuration.ini
 
 #### wallpaper_path
 windows 10 自动下载壁纸的路径，通常为
@@ -22,6 +24,8 @@ C:/Users/<username>/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryMana
 #### mobile_wallpaper_dir
 在另存壁纸主目录下，创建用于保存Mobile端壁纸的子目录名
 
+### 调整main.bat脚本
+修改cd /d 所在行，调整目录地址到main.py文件所在目录
 
 
 ### 配置后台自动运行
